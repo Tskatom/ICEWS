@@ -1,0 +1,111 @@
+2014-12-11 04:22:47,551 - __main__ - INFO - Starting Log
+2014-12-11 04:22:47,816 - __main__ - DEBUG - set([])
+2014-12-11 04:22:47,816 - __main__ - INFO - Finish file /home/tskatom/workspace/icews_data_labeled/events.2012.json
+2014-12-11 04:22:48,115 - __main__ - DEBUG - set([])
+2014-12-11 04:22:48,116 - __main__ - INFO - Finish file /home/tskatom/workspace/icews_data_labeled/events.2013.json
+2014-12-11 04:22:48,124 - __main__ - DEBUG - set([])
+2014-12-11 04:22:48,125 - __main__ - INFO - Finish file /home/tskatom/workspace/icews_data_labeled/events.20140714073501.Release196.json
+2014-12-11 04:22:48,134 - __main__ - DEBUG - set([])
+2014-12-11 04:22:48,134 - __main__ - INFO - Finish file /home/tskatom/workspace/icews_data_labeled/events.20140721073501.Release197.json
+2014-12-11 04:22:48,142 - __main__ - DEBUG - set([])
+2014-12-11 04:22:48,142 - __main__ - INFO - Finish file /home/tskatom/workspace/icews_data_labeled/events.20140728073501.Release198.json
+2014-12-11 04:22:48,149 - __main__ - DEBUG - set([])
+2014-12-11 04:22:48,150 - __main__ - INFO - Finish file /home/tskatom/workspace/icews_data_labeled/events.20140804073502.Release199.json
+2014-12-11 04:22:48,159 - __main__ - DEBUG - set([])
+2014-12-11 04:22:48,159 - __main__ - INFO - Finish file /home/tskatom/workspace/icews_data_labeled/events.20140811174550.Release200.json
+2014-12-11 04:22:48,164 - __main__ - DEBUG - set([])
+2014-12-11 04:22:48,165 - __main__ - INFO - Finish file /home/tskatom/workspace/icews_data_labeled/events.20140818073501.Release201.json
+2014-12-11 04:22:48,170 - __main__ - DEBUG - set([])
+2014-12-11 04:22:48,170 - __main__ - INFO - Finish file /home/tskatom/workspace/icews_data_labeled/events.20140825073501.Release202.json
+2014-12-11 04:22:48,182 - __main__ - DEBUG - set([])
+2014-12-11 04:22:48,182 - __main__ - INFO - Finish file /home/tskatom/workspace/icews_data_labeled/events.20140901073501.Release203.json
+2014-12-11 04:22:48,190 - __main__ - DEBUG - set([])
+2014-12-11 04:22:48,190 - __main__ - INFO - Finish file /home/tskatom/workspace/icews_data_labeled/events.20140908073502.Release204.json
+2014-12-11 04:22:48,198 - __main__ - DEBUG - set([])
+2014-12-11 04:22:48,198 - __main__ - INFO - Finish file /home/tskatom/workspace/icews_data_labeled/events.20140915073502.Release205.json
+2014-12-11 04:22:48,204 - __main__ - DEBUG - set([])
+2014-12-11 04:22:48,204 - __main__ - INFO - Finish file /home/tskatom/workspace/icews_data_labeled/events.20140922073501.Release206.json
+2014-12-11 04:22:48,212 - __main__ - DEBUG - set([])
+2014-12-11 04:22:48,212 - __main__ - INFO - Finish file /home/tskatom/workspace/icews_data_labeled/events.20140929073502.Release207.json
+2014-12-11 04:22:48,220 - __main__ - DEBUG - set([])
+2014-12-11 04:22:48,220 - __main__ - INFO - Finish file /home/tskatom/workspace/icews_data_labeled/events.20141006113543.Release208.json
+2014-12-11 04:22:48,226 - __main__ - DEBUG - set([])
+2014-12-11 04:22:48,227 - __main__ - INFO - Finish file /home/tskatom/workspace/icews_data_labeled/events.20141013073502.Release209.json
+2014-12-11 04:22:48,234 - __main__ - DEBUG - set([])
+2014-12-11 04:22:48,234 - __main__ - INFO - Finish file /home/tskatom/workspace/icews_data_labeled/events.20141020073501.Release210.json
+2014-12-11 04:22:48,241 - __main__ - DEBUG - set([])
+2014-12-11 04:22:48,241 - __main__ - INFO - Finish file /home/tskatom/workspace/icews_data_labeled/events.20141027073501.Release211.json
+2014-12-11 04:22:48,249 - __main__ - DEBUG - set([])
+2014-12-11 04:22:48,249 - __main__ - INFO - Finish file /home/tskatom/workspace/icews_data_labeled/events.20141103073501.Release212.json
+2014-12-11 04:22:48,257 - __main__ - DEBUG - set([])
+2014-12-11 04:22:48,257 - __main__ - INFO - Finish file /home/tskatom/workspace/icews_data_labeled/events.20141110073501.Release213.json
+2014-12-11 04:22:48,265 - __main__ - DEBUG - set([])
+2014-12-11 04:22:48,265 - __main__ - INFO - Finish file /home/tskatom/workspace/icews_data_labeled/events.20141117073501.Release214.json
+2014-12-11 04:22:48,274 - __main__ - DEBUG - set([])
+2014-12-11 04:22:48,274 - __main__ - INFO - Finish file /home/tskatom/workspace/icews_data_labeled/events.20141124073501.Release215.json
+2014-12-11 04:22:48,281 - __main__ - DEBUG - set([])
+2014-12-11 04:22:48,282 - __main__ - INFO - Finish file /home/tskatom/workspace/icews_data_labeled/events.20141201073501.Release216.json
+2014-12-11 04:22:48,290 - __main__ - DEBUG - set([])
+2014-12-11 04:22:48,290 - __main__ - INFO - Finish file /home/tskatom/workspace/icews_data_labeled/events.20141208093602.Release217.json
+2014-12-11 04:22:48,451 - __main__ - DEBUG - set([])
+2014-12-11 04:22:48,451 - __main__ - INFO - Finish file /home/tskatom/workspace/icews_data_labeled/events.2014.json
+2014-12-11 04:24:25,329 - __main__ - INFO - Starting Log
+2014-12-11 04:24:27,251 - __main__ - DEBUG - set([])
+2014-12-11 04:24:27,252 - __main__ - INFO - Finish file /home/tskatom/workspace/icews_data/events.20141208093602.Release217.csv
+2014-12-11 04:25:43,718 - __main__ - INFO - Starting Log
+2014-12-11 04:27:14,139 - __main__ - DEBUG - set([])
+2014-12-11 04:27:14,140 - __main__ - INFO - Finish file /home/tskatom/workspace/icews_data/events.2012.csv
+2014-12-11 04:28:40,937 - __main__ - DEBUG - set([])
+2014-12-11 04:28:40,938 - __main__ - INFO - Finish file /home/tskatom/workspace/icews_data/events.2013.csv
+2014-12-11 04:28:42,896 - __main__ - DEBUG - set([])
+2014-12-11 04:28:42,896 - __main__ - INFO - Finish file /home/tskatom/workspace/icews_data/events.20140714073501.Release196.csv
+2014-12-11 04:28:44,863 - __main__ - DEBUG - set([])
+2014-12-11 04:28:44,864 - __main__ - INFO - Finish file /home/tskatom/workspace/icews_data/events.20140721073501.Release197.csv
+2014-12-11 04:28:46,779 - __main__ - DEBUG - set([])
+2014-12-11 04:28:46,779 - __main__ - INFO - Finish file /home/tskatom/workspace/icews_data/events.20140728073501.Release198.csv
+2014-12-11 04:28:48,413 - __main__ - DEBUG - set([])
+2014-12-11 04:28:48,413 - __main__ - INFO - Finish file /home/tskatom/workspace/icews_data/events.20140804073502.Release199.csv
+2014-12-11 04:28:50,393 - __main__ - DEBUG - set([])
+2014-12-11 04:28:50,394 - __main__ - INFO - Finish file /home/tskatom/workspace/icews_data/events.20140811174550.Release200.csv
+2014-12-11 04:29:32,363 - __main__ - DEBUG - set([])
+2014-12-11 04:29:32,364 - __main__ - INFO - Finish file /home/tskatom/workspace/icews_data/events.2014.csv
+2014-12-11 04:29:33,615 - __main__ - DEBUG - set([])
+2014-12-11 04:29:33,615 - __main__ - INFO - Finish file /home/tskatom/workspace/icews_data/events.20140818073501.Release201.csv
+2014-12-11 04:29:34,670 - __main__ - DEBUG - set([])
+2014-12-11 04:29:34,670 - __main__ - INFO - Finish file /home/tskatom/workspace/icews_data/events.20140825073501.Release202.csv
+2014-12-11 04:29:37,952 - __main__ - DEBUG - set([])
+2014-12-11 04:29:37,953 - __main__ - INFO - Finish file /home/tskatom/workspace/icews_data/events.20140901073501.Release203.csv
+2014-12-11 04:29:40,683 - __main__ - DEBUG - set([])
+2014-12-11 04:29:40,683 - __main__ - INFO - Finish file /home/tskatom/workspace/icews_data/events.20140908073502.Release204.csv
+2014-12-11 04:29:42,814 - __main__ - DEBUG - set([])
+2014-12-11 04:29:42,814 - __main__ - INFO - Finish file /home/tskatom/workspace/icews_data/events.20140915073502.Release205.csv
+2014-12-11 04:29:44,874 - __main__ - DEBUG - set([])
+2014-12-11 04:29:44,875 - __main__ - INFO - Finish file /home/tskatom/workspace/icews_data/events.20140922073501.Release206.csv
+2014-12-11 04:29:47,056 - __main__ - DEBUG - set([])
+2014-12-11 04:29:47,057 - __main__ - INFO - Finish file /home/tskatom/workspace/icews_data/events.20140929073502.Release207.csv
+2014-12-11 04:29:48,899 - __main__ - DEBUG - set([])
+2014-12-11 04:29:48,900 - __main__ - INFO - Finish file /home/tskatom/workspace/icews_data/events.20141006113543.Release208.csv
+2014-12-11 04:29:50,580 - __main__ - DEBUG - set([])
+2014-12-11 04:29:50,580 - __main__ - INFO - Finish file /home/tskatom/workspace/icews_data/events.20141013073502.Release209.csv
+2014-12-11 04:29:52,592 - __main__ - DEBUG - set([])
+2014-12-11 04:29:52,593 - __main__ - INFO - Finish file /home/tskatom/workspace/icews_data/events.20141020073501.Release210.csv
+2014-12-11 04:29:54,444 - __main__ - DEBUG - set([])
+2014-12-11 04:29:54,445 - __main__ - INFO - Finish file /home/tskatom/workspace/icews_data/events.20141027073501.Release211.csv
+2014-12-11 04:29:56,462 - __main__ - DEBUG - set([])
+2014-12-11 04:29:56,462 - __main__ - INFO - Finish file /home/tskatom/workspace/icews_data/events.20141103073501.Release212.csv
+2014-12-11 04:29:58,402 - __main__ - DEBUG - set([])
+2014-12-11 04:29:58,403 - __main__ - INFO - Finish file /home/tskatom/workspace/icews_data/events.20141110073501.Release213.csv
+2014-12-11 04:30:00,585 - __main__ - DEBUG - set([])
+2014-12-11 04:30:00,586 - __main__ - INFO - Finish file /home/tskatom/workspace/icews_data/events.20141117073501.Release214.csv
+2014-12-11 04:30:02,859 - __main__ - DEBUG - set([])
+2014-12-11 04:30:02,860 - __main__ - INFO - Finish file /home/tskatom/workspace/icews_data/events.20141124073501.Release215.csv
+2014-12-11 04:30:04,775 - __main__ - DEBUG - set([])
+2014-12-11 04:30:04,775 - __main__ - INFO - Finish file /home/tskatom/workspace/icews_data/events.20141201073501.Release216.csv
+2014-12-11 04:30:06,657 - __main__ - DEBUG - set([])
+2014-12-11 04:30:06,657 - __main__ - INFO - Finish file /home/tskatom/workspace/icews_data/events.20141208093602.Release217.csv
+2014-12-16 18:56:27,703 - __main__ - INFO - Starting Log
+2014-12-16 18:56:29,750 - __main__ - DEBUG - set([])
+2014-12-16 18:56:29,750 - __main__ - INFO - Finish file /home/tskatom/workspace/icews_data/events.20141215073501.Release218.csv
+2014-12-23 16:25:01,075 - __main__ - INFO - Starting Log
+2014-12-23 16:25:03,350 - __main__ - DEBUG - set([])
+2014-12-23 16:25:03,350 - __main__ - INFO - Finish file /home/tskatom/workspace/icews_data/events.20141222073502.Release219.csv

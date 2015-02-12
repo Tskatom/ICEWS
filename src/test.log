@@ -1,0 +1,16 @@
+2014-12-12 04:21:37,464 - multi_task - ERROR - 51969 - 140258297317120 - top_document_count - Error second step map!
+Traceback (most recent call last):
+  File "/raid/home/tskatom/workspace/icews_model/src/multi_task.py", line 377, in top_document_count
+    lead_sent = full_text_blob.sentences[0]
+IndexError: list index out of range
+2014-12-12 04:27:42,148 - multi_task - ERROR - 52183 - 140032604460800 - top_document_count - Error second step map!
+Traceback (most recent call last):
+  File "/raid/home/tskatom/workspace/icews_model/src/multi_task.py", line 378, in top_document_count
+    lead_sent = full_text_blob.sentences[0]
+IndexError: list index out of range
+2014-12-12 04:34:13,358 - multi_task - ERROR - 52319 - 140079477139200 - top_document_count - Error second step map!
+Traceback (most recent call last):
+  File "/raid/home/tskatom/workspace/icews_model/src/multi_task.py", line 378, in top_document_count
+    lead_sent = full_text_blob.sentences[0]
+IndexError: list index out of range
+2014-12-12 04:34:57,632 - multi_task - DEBUG - 52319 - 140079477139200 - top_document_count - Countries ["Egypt"]
