@@ -138,7 +138,7 @@ class Mena():
         location = self.location
         country = self.country
         pred_level = self.pred_level
-        start_day = "2014-09-01"
+        start_day = "2014-04-01"
         train_end_day = (parser.parse(event_date) -
                          timedelta(days=3)).strftime("%Y-%m-%d")
         end_day = (parser.parse(event_date) -

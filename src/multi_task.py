@@ -46,10 +46,21 @@ def handler(task):
 def create_keywords_count_task(args, task_queue):
     files = glob.glob(os.path.join(args.inFolder, "arabia*"))
     files.sort(reverse=False)
-    traceOutFolder = args.outFolder + "_trace"
+    traceOutFolder = args.outFolder  + "_trace"
     if not os.path.exists(traceOutFolder):
         os.mkdir(traceOutFolder)
+    start = args.start
+    end = args.end
+    pattern = re.compile('\d{4}-\d{2}-\d{2}')
     for f in files:
+        basename = os.path.basename(f)
+        found = pattern.findall(basename)
+        if len(found) > 0:
+            baseday = found[0]
+        else:
+            continue
+        if baseday < start or baseday > end:
+            continue
         param = {}
         param["dayFile"] = f
         param["outFolder"] = args.outFolder
@@ -76,13 +87,20 @@ def keyword_count(param):
     result = {}
 
     trace_file = os.path.join(traceOutFolder, basename)
+    #set up inverse index to store the matched keywords and doc infoa
+    inverse_result = {}
     with open(dayFile) as df, open(outFile,'w') as of, open(trace_file, 'w') as tf:
         for line in df:
             try:
                 post = json.loads(line)
-                fullText = post["FullText"]
+                eid = post["embersId"]
+                #fullText = post["FullText"]
+                fullText = post["FullText"][:80] # we use the first 40 character to match
                 post_date = parser.parse(post['date']).strftime('%Y-%m-%d')
                 country = post["PublishCountryE"]
+                if country not in COUNTRY_ENG:
+                    contiue
+
                 doc_words = {}
                 for keyword in keywords:
                     count = fullText.count(keyword)
@@ -90,14 +108,19 @@ def keyword_count(param):
                     result[country].setdefault(keyword, {})
                     result[country][keyword].setdefault(post_date,0)
                     result[country][keyword][post_date] += count
+                    inverse_result.setdefault(country, {})
+                    inverse_result[country].setdefault(keyword, {})
+                    inverse_result[country][keyword].setdefault(post_date, [])
                     if count > 0:
                         doc_words[keyword] = count
+                        inverse_result[country][keyword][post_date].append((eid, count))
                 if len(doc_words) > 0:
                     post['keywords_count'] = doc_words
-                    tf.write((json.dumps(post, ensure_ascii=False) + "\n").decode('utf-8'))
+                    #tf.write((json.dumps(post, ensure_ascii=False) + "\n").decode('utf-8'))
             except:
                 continue
         of.write(json.dumps(result, ensure_ascii=False).encode('utf-8'))
+        tf.write(json.dumps(inverse_result,ensure_ascii=False).encode('utf-8'))
     print "Done with %s\n" % dayFile
 
 def create_document_matched_task(args, task_queue):
@@ -192,7 +215,7 @@ def document_count(param):
                 post = json.loads(line)
                 if "FullText" not in post:
                     continue
-                fullText = post["FullText"]
+                fullText = post["FullText"][:80]
                 post_date = parser.parse(post['date']).strftime("%Y-%m-%d")
                 if "PublishCountryE" not in post or "PublishCountryA" not in post:
                     continue
@@ -203,7 +226,7 @@ def document_count(param):
                 countries = []
                 #set up the country list for the posts
                 if places is None:
-                    if pub_country_a in COUNTRY_ARABIC:
+                    if pub_country_e in COUNTRY_ENG:
                         countries.append(pub_country_e)
                 else:
                     places = set([p["Name"].split("-")[0].encode("utf-8").strip() for p in places])

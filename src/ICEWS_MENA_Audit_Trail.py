@@ -185,7 +185,7 @@ def get_raw_arabia(start, end, country):
         if folder_type == "arabia":
             ratio = 1.0
         else:
-            ratio = 0.1
+            ratio = 0.5
 
         for f in day_files:
             #index_file = os.path.join(folder, f)
@@ -208,7 +208,7 @@ def get_raw_arabia(start, end, country):
         return events
 
     results = []
-    folders = [protest_folder]
+    folders = [protest_folder, coerce_folder, assault_folder]
     #folders = [protest_folder, coerce_folder, assault_folder]
     for folder in folders:
         results += get_data(folder)
