@@ -87,23 +87,34 @@ def evaluate(pred_file, truth_file):
         p = preds[name]
         t = truths[name]
         scores = map(score, p.values, t.values)
-        print name, np.mean(scores)
+        print '\t', name, np.mean(scores)
 
 def test_exp():
-    print "City Level"
-    evaluate('./data/city_predictions.csv', './data/city_testY.csv')
-    print "country Level"
-    evaluate('./data/country_predictions.csv', './data/country_testY.csv')
-
-test = True
+    levels = ["city", "country"]
+    events = ["14", "17", "18"]
+    for e in events:
+        print "Event Type %s" % e
+        for region in levels:
+            print "\tRegion %s" % region
+            evaluate('./data/%s_predictions_%s.csv' % (region, e), './data/%s_testY_%s.csv' % (region, e))
 
 if __name__ == "__main__":
+    task = sys.argv[1]
+    if task == "construct":
+        countries = MENA_COUNTRY
+        events = ["14", "17", "18"]
+        for e in events:
+            icews_folder = "/raid/home/tskatom/workspace/icews_model/data/icews_gsr/232/" + e
+            construct_dataset(countries, icews_folder, "mena", e)
+    elif task == "evaluate":
+        test_exp()
+
     if test:
         countries = MENA_COUNTRY
         events = ["14", "17", "18"]
         for e in events:
             icews_folder = "/raid/home/tskatom/workspace/icews_model/data/icews_gsr/232/" + e
-        #construct_dataset(countries, icews_folder)
+            construct_dataset(countries, icews_folder, "mena", e)
         print "City Level"
         evaluate('./data/city_predictions.csv', './data/city_testY.csv')
         print "country Level"
