@@ -7,6 +7,7 @@ __email__ = "tskatom@vt.edu"
 import sys
 import os
 import pandas as pds
+import numpy as np
 
 """
 VAR model experiments
@@ -94,6 +95,9 @@ if __name__ == "__main__":
     if test:
         countries = MENA_COUNTRY
         icews_folder = "/raid/home/tskatom/workspace/icews_model/data/icews_gsr/232/14"
-        construct_dataset(countries, icews_folder)
-        #evaluate('./data/predictions.csv', './data/testY.csv')
+        #construct_dataset(countries, icews_folder)
+        print "City Level"
+        evaluate('./data/city_predictions.csv', './data/city_testY.csv')
+        print "country Level"
+        evaluate('./data/country_predictions.csv', './data/country_testY.csv')
 
