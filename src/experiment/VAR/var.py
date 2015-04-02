@@ -39,7 +39,7 @@ CAPITAL_COUNTRY = {
     "Saudi Arabia": "Riyadh"
 }
 
-def construct_dataset(countries, icews_folder, region="mena"):
+def construct_dataset(countries, icews_folder, region="mena", event="14"):
     country_series = []
     city_series = []
     for country in countries:
@@ -68,10 +68,10 @@ def construct_dataset(countries, icews_folder, region="mena"):
     city_weekly_df = city_df.resample('W', how='sum').fillna(0)
     city_weekly_df.index.name = 'date'
     #out put to file
-    country_outf = os.path.join('./data', 'country_%s.csv' % region)
+    country_outf = os.path.join('./data', 'country_%s_%s.csv' % (region, event))
     country_weekly_df.to_csv(country_outf)
 
-    city_outf = os.path.join('./data', 'city_%s.csv' % region)
+    city_outf = os.path.join('./data', 'city_%s_%s.csv' % (region, event))
     city_weekly_df.to_csv(city_outf)
 
 def score(pred, truth):
@@ -87,14 +87,22 @@ def evaluate(pred_file, truth_file):
         p = preds[name]
         t = truths[name]
         scores = map(score, p.values, t.values)
-        print np.mean(scores)
+        print name, np.mean(scores)
+
+def test_exp():
+    print "City Level"
+    evaluate('./data/city_predictions.csv', './data/city_testY.csv')
+    print "country Level"
+    evaluate('./data/country_predictions.csv', './data/country_testY.csv')
 
 test = True
 
 if __name__ == "__main__":
     if test:
         countries = MENA_COUNTRY
-        icews_folder = "/raid/home/tskatom/workspace/icews_model/data/icews_gsr/232/14"
+        events = ["14", "17", "18"]
+        for e in events:
+            icews_folder = "/raid/home/tskatom/workspace/icews_model/data/icews_gsr/232/" + e
         #construct_dataset(countries, icews_folder)
         print "City Level"
         evaluate('./data/city_predictions.csv', './data/city_testY.csv')

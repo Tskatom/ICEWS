@@ -5,9 +5,9 @@ load_data <- function(filename){
 }
 
 setwd("/home/weiw/workspace/ICEWS/src/experiment/VAR/")
-icews_exp <- function(region)
+icews_exp <- function(region, event)
 {
-  icews_file <- sprintf("./data/%s_mena.csv", region)
+  icews_file <- sprintf("./data/%s_mena_%s.csv", region, event)
   icews_data <- load_data(icews_file)
   new_icews_data <- icews_data[-1]
   total_count <- nrow(new_icews_data)
@@ -31,11 +31,17 @@ icews_exp <- function(region)
   final_preds <- matrix(preds, nrow=test_period, ncol=dim(new_icews_data)[2], byrow=TRUE)
   colnames(final_preds) <- colnames(new_icews_data)
   
-  write.table(testY, file=sprintf('./data/%s_testY.csv', region), sep=',', quote=TRUE, row.names=FALSE)
-  write.table(final_preds, file=sprintf('./data/%s_predictions.csv', region), sep=',', quote=TRUE, row.names=FALSE)
+  write.table(testY, file=sprintf('./data/%s_testY_%s.csv', region, event), sep=',', quote=TRUE, row.names=FALSE)
+  write.table(final_preds, file=sprintf('./data/%s_predictions_%s.csv', region, event), sep=',', quote=TRUE, row.names=FALSE)
 }
 
-icews_exp("city")
-icews_exp("country")
+icews_exp("city", "14")
+icews_exp("country", "14")
+
+icews_exp("city", "17")
+icews_exp("country", "17")
+
+icews_exp("city", "18")
+icews_exp("country", "18")
 
 
