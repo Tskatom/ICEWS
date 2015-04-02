@@ -109,14 +109,3 @@ if __name__ == "__main__":
     elif task == "evaluate":
         test_exp()
 
-    if test:
-        countries = MENA_COUNTRY
-        events = ["14", "17", "18"]
-        for e in events:
-            icews_folder = "/raid/home/tskatom/workspace/icews_model/data/icews_gsr/232/" + e
-            construct_dataset(countries, icews_folder, "mena", e)
-        print "City Level"
-        evaluate('./data/city_predictions.csv', './data/city_testY.csv')
-        print "country Level"
-        evaluate('./data/country_predictions.csv', './data/country_testY.csv')
-
