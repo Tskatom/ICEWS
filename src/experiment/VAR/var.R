@@ -11,7 +11,7 @@ icews_exp <- function(region)
   icews_data <- load_data(icews_file)
   new_icews_data <- icews_data[-1]
   total_count <- nrow(new_icews_data)
-  test_period <- 10
+  test_period <- 12
   testY <- new_icews_data[(total_count-test_period+1):total_count,]
   preds <- c()
   for(i in seq(test_period,1,-1))
