@@ -1,0 +1,11 @@
+-----------------------------------------------------------------
+Experiment 18: train one lasso model to make weekly prediction based on daily level prediction using keywords as feature based on icews keywords
+Country     	0614	0617	0618
+Iraq        	2.23 (2.76)	3.65 (3.65)	3.73 (3.73)
+Egypt       	3.30 (3.40)	3.20 (3.20)	3.44 (3.44)
+Libya       	2.38 (3.00)	2.33 (2.33)	2.73 (2.73)
+Jordan      	3.00 (3.40)	2.85 (3.02)	1.67 (2.60)
+Bahrain     	3.00 (3.20)	2.28 (2.58)	1.00 (1.70)
+Syria       	1.58 (2.38)	3.00 (3.05)	2.91 (2.91)
+Saudi Arabia	3.00 (3.30)	2.91 (2.91)	3.38 (3.60)
+Average     	2.64 (3.06)	2.89 (2.96)	2.69 (2.96)

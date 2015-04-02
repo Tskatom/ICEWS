@@ -1,0 +1,62 @@
+We use this document to record the progress we made in icews model development
+
+2014-09-24
+icews.py
+    Used to compute the daily count of icews events, 
+    usage:
+        python icews.py --inFolder ~/workspace/icews_data --outFolder ~/workspace/icews_model/data/icews_gsr --version 206
+
+arabia_wordscount.py
+    used to generate the location based keywords count in arabia inform data set
+    usage:
+        python arabia_keywordscount.py --inFolder /raid/tskatom/arabia_achla_keywords_count --outFolder /raid/tskatom/workspace/icews_model/data/achla_words
+
+
+config.py
+    used to store the CAMEO code information
+
+different normalizer also will cause different result.
+I try two normalizer: 1> (data - min_v)/(max_v - min_v)
+2> using L2 normaization
+
+
+
+----------------------------------------
+data prepare
+1> download the arabia inform news
+python ~/scratch/prototype/s3_get.py -p raw/arabia/news/arabia-news-2014-11-1
+
+2> download the latest icews data and transform it
+python icews.py --version 214
+
+3> get the latest pp count
+bash ../data/pp_counts/run_icews.sh
+
+4> compute the documents count files
+bash count_document.sh 2014-11-10 2014-11-17
+
+5> get the final count
+bash Generate_count.sh
+
+6> Calculate the ICEWS events count
+    ********** OLD *************
+    6.1> merge the files
+    cat icews_data/events.2* > icews-merge_2012_214.csv
+    ****************************
+    ********** NEW *************
+    6.1 > merge the files
+    python src/icews_merge.py ~/workspace/icews_data/ ~/workspace/icews-merge_2012_gsrver.csv
+    ***************************
+    6.2> run the code to generate the icews_event count
+        mkdir gsr version
+    python ~/workspace/icews_model/src/icews-cameo-cities.py ~/workspace/icews-merge_2012_214.csv
+    python ~/workspace/icews_model/src/icews-cameo-counts-intensities.py ~/workspace/icews-merge_2012_214.csv
+
+7>Run the model to make prediction
+    #modify the event date and gsr version
+    python Prediction.py --icews_gsr ../data/icews_gsr/214 --icews_count ../data/icews_counts/214 --event_date 2014-11-19 --out ../data/warn_surr/214 --mena 
+    python Prediction.py --icews_gsr ../data/icews_gsr/214 --icews_count ../data/icews_counts/214 --event_date 2014-11-19 --out ../data/warn_surr/214 --la
+
+    
+
+

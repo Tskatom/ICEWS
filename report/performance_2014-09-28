@@ -1,0 +1,150 @@
+-----------------------------------------------------------------
+Experiment 1: train two models separately using achla keywords
+Country     	0614	0617	0618
+Iraq        	1.00 (2.80)	3.35 (2.75)	2.19 (1.37)
+Egypt       	2.40 (1.01)	2.47 (1.94)	2.34 (1.69)
+Libya       	2.67 (3.30)	2.20 (2.04)	2.73 (1.47)
+Jordan      	0.75 (2.40)	2.82 (2.60)	0.60 (2.40)
+Bahrain     	2.00 (3.60)	0.83 (2.50)	1.00 (3.20)
+Syria       	1.00 (2.80)	2.73 (1.45)	3.09 (2.17)
+Saudi Arabia	1.00 (3.60)	2.42 (0.96)	1.62 (3.40)
+-----------------------------------------------------------------
+Experiment 2: train two model separately using mouna keywords
+Country     	0614	0617	0618
+Iraq        	2.48 (3.20)	3.63 (3.30)	3.32 (2.63)
+Egypt       	1.63 (0.85)	2.30 (1.60)	2.93 (1.87)
+Libya       	0.70 (2.40)	1.25 (1.17)	1.74 (0.48)
+Jordan      	1.75 (2.80)	2.97 (3.00)	1.00 (3.10)
+Bahrain     	2.00 (3.60)	1.50 (2.60)	1.00 (3.20)
+Syria       	0.67 (2.80)	2.88 (2.13)	2.67 (1.34)
+Saudi Arabia	2.00 (3.20)	1.96 (1.02)	2.75 (3.60)
+-----------------------------------------------------------------
+Experiment 3: train one Lasso model using achal keywords
+Country     	0614	0617	0618
+Iraq        	0.69 (2.70)	3.41 (2.87)	2.20 (1.40)
+Egypt       	1.60 (0.90)	2.45 (1.91)	2.38 (1.75)
+Libya       	1.26 (2.12)	2.33 (2.40)	2.86 (1.72)
+Jordan      	1.57 (2.50)	2.49 (1.58)	1.33 (3.10)
+Bahrain     	3.67 (3.80)	2.64 (3.30)	1.00 (3.20)
+Syria       	0.75 (1.30)	2.81 (1.69)	3.10 (2.21)
+Saudi Arabia	1.00 (3.50)	2.07 (1.16)	3.12 (3.50)
+-----------------------------------------------------------------
+Experiment 4: train one Lasso model using mouna keywords
+Country     	0614	0617	0618
+Iraq        	2.11 (2.03)	3.42 (2.89)	3.60 (3.20)
+Egypt       	1.61 (0.82)	2.29 (1.58)	3.18 (2.36)
+Libya       	1.34 (1.68)	2.46 (2.32)	2.63 (1.27)
+Jordan      	2.00 (3.60)	2.56 (3.30)	2.00 (3.60)
+Bahrain     	1.67 (3.60)	1.31 (2.60)	1.00 (3.20)
+Syria       	1.00 (3.10)	3.02 (2.35)	2.72 (1.44)
+Saudi Arabia	0.75 (3.30)	2.50 (1.17)	2.88 (3.70)
+-----------------------------------------------------------------
+Experiment 5: train one model using only past weeks' weekly count
+Country     	0614	0617	0618
+Iraq        	2.21 (2.60)	3.56 (3.11)	3.53 (3.06)
+Egypt       	2.24 (0.49)	3.11 (2.22)	3.17 (2.35)
+Libya       	2.06 (2.20)	2.38 (2.20)	2.82 (1.65)
+Jordan      	0.62 (2.50)	2.81 (2.60)	1.67 (3.60)
+Bahrain     	2.00 (3.60)	2.36 (2.90)	1.00 (3.20)
+Syria       	1.25 (2.90)	2.85 (2.03)	2.89 (1.78)
+Saudi Arabia	0.75 (3.60)	2.70 (1.48)	1.00 (3.30)
+-----------------------------------------------------------------
+Experiment 6: train one lasso model to make prediction in daily level using Achla keywords
+Country     	0614	0617	0618
+Iraq        	3.29 (3.83)	2.34 (3.67)	2.85 (1.69)
+Egypt       	0.70 (1.65)	2.42 (1.58)	2.44 (3.37)
+Libya       	1.00 (3.70)	1.25 (3.60)	2.12 (2.71)
+Jordan      	3.86 (3.99)	2.71 (3.80)	3.57 (3.94)
+Bahrain     	3.71 (3.96)	3.14 (3.76)	3.43 (3.89)
+Syria       	3.43 (3.90)	1.57 (3.33)	3.06 (2.27)
+Saudi Arabia	3.86 (3.97)	1.50 (2.87)	3.43 (3.89)
+-----------------------------------------------------------------
+Experiment 7: train one lasso model to make prediction in daily level using Mouna keywords
+Country     	0614	0617	0618
+Iraq        	3.29 (3.83)	2.34 (3.67)	2.86 (1.72)
+Egypt       	0.73 (2.01)	2.41 (1.43)	2.45 (3.37)
+Libya       	1.00 (3.70)	1.25 (3.60)	2.18 (2.71)
+Jordan      	3.86 (3.99)	2.71 (3.80)	3.57 (3.94)
+Bahrain     	3.71 (3.96)	3.14 (3.76)	3.43 (3.89)
+Syria       	3.43 (3.90)	1.57 (3.33)	3.06 (2.27)
+Saudi Arabia	3.86 (3.97)	1.43 (2.90)	3.43 (3.89)
+-----------------------------------------------------------------
+Experiment 8: train one lasso model to make prediction in daily level using more recent factors based on Achla keywords
+Country     	0614	0617	0618
+Iraq        	2.71 (3.76)	2.38 (3.69)	3.01 (2.16)
+Egypt       	1.13 (3.05)	2.55 (2.70)	2.08 (2.98)
+Libya       	2.11 (3.80)	2.58 (3.73)	2.18 (2.74)
+Jordan      	3.86 (3.99)	2.71 (3.80)	3.57 (3.94)
+Bahrain     	3.71 (3.96)	3.14 (3.76)	3.43 (3.89)
+Syria       	3.43 (3.90)	1.57 (3.33)	2.88 (2.06)
+Saudi Arabia	3.86 (3.97)	1.39 (2.91)	3.43 (3.89)
+-----------------------------------------------------------------
+Experiment 9: train one lasso model to make prediction in daily level using more recent factors based on Mouna keywords
+Country     	0614	0617	0618
+Iraq        	3.14 (3.81)	2.38 (3.69)	2.86 (1.72)
+Egypt       	1.21 (2.70)	2.41 (1.81)	2.29 (3.24)
+Libya       	2.86 (3.89)	2.14 (3.67)	1.72 (2.80)
+Jordan      	3.86 (3.99)	2.71 (3.80)	3.57 (3.94)
+Bahrain     	3.71 (3.96)	3.14 (3.76)	3.43 (3.89)
+Syria       	3.43 (3.90)	1.57 (3.33)	3.00 (2.19)
+Saudi Arabia	3.86 (3.97)	1.86 (2.98)	3.43 (3.89)
+-----------------------------------------------------------------
+Experiment 10: train one lasso model to make prediction in daily level using documents as feature based on Achla keywords
+Country     	0614	0617	0618
+Iraq        	3.29 (3.83)	2.34 (3.67)	3.00 (2.05)
+Egypt       	0.81 (2.79)	2.59 (2.06)	2.45 (3.37)
+Libya       	1.00 (3.70)	1.25 (3.60)	2.21 (2.70)
+Jordan      	3.86 (3.99)	2.71 (3.80)	3.57 (3.94)
+Bahrain     	3.71 (3.96)	3.14 (3.76)	3.43 (3.89)
+Syria       	3.43 (3.90)	1.57 (3.33)	3.06 (2.27)
+Saudi Arabia	3.86 (3.97)	1.43 (2.90)	3.43 (3.89)
+-----------------------------------------------------------------
+Experiment 11: train one lasso model to make prediction in daily level using document as feature based on Mouna keywords
+Country     	0614	0617	0618
+Iraq        	3.29 (3.83)	2.34 (3.67)	3.00 (2.05)
+Egypt       	0.81 (2.79)	2.59 (2.06)	2.45 (3.37)
+Libya       	1.00 (3.70)	1.25 (3.60)	2.21 (2.70)
+Jordan      	3.86 (3.99)	2.71 (3.80)	3.57 (3.94)
+Bahrain     	3.71 (3.96)	3.14 (3.76)	3.43 (3.89)
+Syria       	3.43 (3.90)	1.57 (3.33)	3.06 (2.27)
+Saudi Arabia	3.86 (3.97)	1.43 (2.90)	3.43 (3.89)
+-----------------------------------------------------------------
+Experiment 12: train one lasso model to make weekly prediction based on daily level prediction using more recent factors based on Achla keywords
+Country     	0614	0617	0618
+Iraq        	1.67 (2.70)	3.60 (3.30)	3.58 (3.15)
+Egypt       	2.83 (1.92)	3.31 (2.62)	3.30 (2.60)
+Libya       	2.31 (2.90)	2.21 (2.55)	3.10 (2.21)
+Jordan      	3.00 (3.90)	0.00 (2.60)	2.00 (3.60)
+Bahrain     	3.00 (3.70)	1.00 (2.30)	1.00 (3.20)
+Syria       	2.00 (3.30)	0.00 (1.30)	2.65 (1.31)
+Saudi Arabia	3.00 (3.80)	0.00 (0.20)	0.00 (3.20)
+-----------------------------------------------------------------
+Experiment 13: train one lasso model to make weekly prediction based on daily level using more recent factors based on Mouna keywords
+Country     	0614	0617	0618
+Iraq        	2.67 (3.00)	3.60 (3.30)	3.46 (2.92)
+Egypt       	2.57 (1.54)	3.42 (2.84)	3.54 (3.07)
+Libya       	0.00 (3.10)	1.00 (2.20)	3.18 (2.36)
+Jordan      	3.00 (3.90)	0.00 (2.60)	2.00 (3.60)
+Bahrain     	3.00 (3.70)	1.00 (2.30)	1.00 (3.20)
+Syria       	2.00 (3.30)	0.00 (1.30)	2.84 (1.68)
+Saudi Arabia	3.00 (3.80)	2.24 (1.67)	0.00 (3.20)
+-----------------------------------------------------------------
+Experiment 14: train one lasso model to make weekly prediction based on daily level prediction using documents as feature based on Achla keywords
+Country     	0614	0617	0618
+Iraq        	1.00 (2.80)	3.60 (3.30)	3.67 (3.33)
+Egypt       	2.25 (0.49)	3.14 (2.29)	3.29 (2.57)
+Libya       	2.00 (1.90)	2.36 (2.28)	3.03 (2.06)
+Jordan      	3.00 (3.90)	0.00 (2.60)	2.00 (3.60)
+Bahrain     	3.00 (3.70)	1.00 (2.30)	1.00 (3.20)
+Syria       	2.00 (3.30)	0.00 (1.30)	2.81 (1.62)
+Saudi Arabia	3.00 (3.80)	0.00 (0.20)	0.00 (3.20)
+-----------------------------------------------------------------
+Experiment 15: train one lasso model to make weekly prediction based on daily level prediction using document as feature based on Mouna keywords
+Country     	0614	0617	0618
+Iraq        	1.00 (2.80)	3.60 (3.30)	3.67 (3.33)
+Egypt       	2.25 (0.49)	3.14 (2.29)	3.29 (2.57)
+Libya       	2.00 (1.90)	2.36 (2.28)	3.03 (2.06)
+Jordan      	3.00 (3.90)	0.00 (2.60)	2.00 (3.60)
+Bahrain     	3.00 (3.70)	1.00 (2.30)	1.00 (3.20)
+Syria       	2.00 (3.30)	0.00 (1.30)	2.81 (1.62)
+Saudi Arabia	3.00 (3.80)	0.00 (0.20)	0.00 (3.20)

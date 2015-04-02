@@ -1,0 +1,214 @@
+#!/usr/bin/python
+# -*- coding: utf-8 -*-
+"""
+Generate the Audit Trail for ICEWS MENA Warning
+"""
+__author__ = "Wei Wang"
+__email__ = "tskatom@vt.edu"
+
+import os
+from etool import message
+import json
+import re
+from math import ceil
+from datetime import datetime, timedelta
+from dateutil import parser
+import argparse
+
+CAPITAL_COUNTRY = {
+        "Argentina": "Buenos Aires",
+        "Brazil": "Distrito Federal",
+        "Chile": "Santiago",
+        "Colombia": "Bogota",
+        "Ecuador": "Quito",
+        "El Salvador": "San Salvador",
+        "Mexico": "Mexico City",
+        "Paraguay": "Asuncion",
+        "Uruguay": "Montevideo",
+        "Venezuela": "Caracas",
+        "Iraq": "Baghdad",
+        "Egypt": "Cairo",
+        "Libya": "Tripoli",
+        "Jordan": "Amman",
+        "Bahrain": "Manama",
+        "Syria": "Damascus",
+        "Saudi Arabia": "Riyadh"
+        }
+
+
+def wrapper_fusion(warning):
+    """
+    Generating a fake fusion message for original ICEWS warning.
+    """
+    fusion_mess = {}
+    fusion_mess["classification"] = None
+    fusion_mess["comments"] = warning["comments"]
+    fusion_mess["confidence"] = warning["confidence"]
+    fusion_mess["confidenceIsProbability"] = warning["confidenceIsProbability"]
+    fusion_mess["coordinates"] = None
+    fusion_mess["date"] = warning["date"]
+    fusion_mess["distance"] = None
+    fusion_mess["eventDate"] = warning["eventDate"]
+    fusion_mess["eventType"] = warning["eventType"]
+    fusion_mess["feed"] = None
+    fusion_mess["feedPath"] = None
+    fusion_mess["location"] = warning["location"]
+    fusion_mess["location_popln_size"] = None
+    fusion_mess["model"] = warning.get("model", "")
+    fusion_mess["old_location"] = warning["location"]
+    fusion_mess["old_location_popln_size"] = None
+    fusion_mess["nearbyWarnings_count"] = None
+    fusion_mess["population"] = warning["population"]
+    fusion_mess["qs_prediction"] = None
+
+    fusion_mess["derivedFrom"] = {
+            "comments": None,
+            "derivedMessages": [warning],
+            "end": None,
+            "start": None,
+            "source": None,
+            "fusionMessage": None
+            }
+
+    fusion_mess = message.add_embers_ids(fusion_mess)
+
+    return fusion_mess
+
+
+def extend_surr(surr, warn):
+
+    surr["messageType"] = "ICEWS"
+    eids = surr["derivedFrom"]["derivedIds"]
+    icews_der_msgs = get_raw_icews_v2(eids)
+    surr["derivedFrom"]["derivedMessages"] = icews_der_msgs
+    return surr
+
+def get_raw_icews_v2(embersIds):
+    json_file = "/home/tskatom/workspace/icews_model/src/Historical_ICEWS_2015-03-30.json"
+    rs = []
+    with open(json_file) as jf:
+        for line in jf:
+            m = json.loads(line)
+            if m['embersId'] in embersIds:
+                rs.append(m)
+    return rs
+
+def get_raw_icews(start, end, event_types, country, city, icews_folder="../data/icews_gsr_events"):
+    """
+    Ingest the raw icews message according to the start and end day
+    for that location
+    """
+    #find the lastest version of the ICEWS
+    folders = os.listdir(icews_folder)
+    latest_ver = str(max(map(int, folders)))
+    version_folder = os.path.join(icews_folder, latest_ver)
+    results = []
+    for e_type in event_types: #e_type format 06xx
+        event_folder = os.path.join(version_folder, e_type[2:])
+        if city is not None: #city level messages
+            location = city
+        else:
+            location = country
+        event_file = os.path.join(event_folder, location.replace(" ", "_"))
+        with open(event_file) as ef:
+            for line in ef:
+                day_events = json.loads(line)
+                event_date = day_events["day"]
+                if event_date > end or event_date < start:
+                    continue
+                else:
+                    results += day_events["events"]
+    return results
+
+
+def get_raw_arabia(start, end, country):
+    protest_folder = "/raid/tskatom/arabia_handbook_document_count_filter"
+    coerce_folder = "/raid/tskatom/coerce_document_count_filter"
+    assault_folder = "/raid/tskatom/assault_document_count_filter"
+
+    def get_data(folder):
+        day_files = []
+        for f in os.listdir(folder):
+            searched = re.search("(\d{4}-\d{2}-\d{2})", f)
+            if searched:
+                day = searched.group()
+                if day <= end and day >= start:
+                    day_files.append(f)
+        #event_folder = "/raid/tskatom/raw_arabia_inform"
+        events = []
+        folder_type = os.path.basename(folder).split("_")[0]
+        if folder_type == "arabia":
+            ratio = 1.0
+        else:
+            ratio = 0.5
+
+        for f in day_files:
+            #index_file = os.path.join(folder, f)
+            #json_index = json.load(open(index_file))
+            #country_set = json_index.get(country, {})
+            #load the real events according to embersId
+            #embersIds = {}
+            #for day, ids in country_set.items():
+            #    embersIds.update({i:1 for i in ids})
+
+            event_file = os.path.join(folder, f)
+            event_set = json.load(open(event_file))
+            country_set = event_set.get(country, {})
+
+            for day, day_set in country_set.items():
+                #choose 10% of the events
+                m_index = int(ceil(len(day_set) * ratio))
+                print m_index
+                events += day_set[:m_index]
+        return events
+
+    results = []
+    folders = [protest_folder, coerce_folder, assault_folder]
+    #folders = [protest_folder, coerce_folder, assault_folder]
+    for folder in folders:
+        results += get_data(folder)
+
+    return results
+
+class AuditTrailFactory():
+    def gene_audit_trail(self, warn, surr):
+        icews_surr = extend_surr(surr, warn)
+        #modify the current warning structure
+        del warn["derivedFrom"]["derivedIds"]
+        warn["derivedFrom"]["derivedMessages"] = [icews_surr]
+
+        audit_trail = wrapper_fusion(warn)
+        warn_id = warn["embersId"]
+        return warn_id, audit_trail
+
+if __name__ == "__main__":
+    ap = argparse.ArgumentParser()
+    ap.add_argument('--warn', type=str, help="warn file")
+    ap.add_argument('--surr', type=str, help="surr file")
+    ap.add_argument('--out', type=str, help='out folder')
+    args = ap.parse_args()
+
+    outfolder = args.out
+    current_day = datetime.now().strftime('%Y-%m-%d')
+    #current_day = "2014-12-16"
+    outfolder = os.path.join(outfolder, current_day)
+
+    if not os.path.exists(outfolder):
+        os.mkdir(outfolder)
+
+    factory = AuditTrailFactory()
+    his_surr = {}
+    with open(args.warn) as wf, open(args.surr) as sf:
+        warnings = [json.loads(l) for l in wf]
+        surrs = [json.loads(l) for l in sf]
+        surr_dict = {s["embersId"]:s for s in surrs}
+        for w in warnings:
+            surr_id = w["derivedFrom"]["derivedIds"][0]
+            surr = surr_dict[surr_id]
+            his_surr[surr_id] = w
+            warn_id, audit_trail = factory.gene_audit_trail(w, surr)
+            out_f = os.path.join(outfolder, "%s.json" % warn_id)
+            with open(out_f, 'w') as otf:
+                json.dump(audit_trail, otf)
+
+

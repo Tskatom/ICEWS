@@ -1,0 +1,11 @@
+-----------------------------------------------------------------
+Experiment 14: train one lasso model to make weekly prediction based on daily level prediction using documents as feature based on Handbook keywords
+Country     	0614	0617	0618
+Iraq        	2.25 (2.80)	3.60 (3.20)	3.67 (3.35)
+Egypt       	2.19 (0.38)	3.16 (2.31)	3.29 (2.57)
+Libya       	1.94 (1.60)	2.29 (1.98)	2.92 (1.84)
+Jordan      	0.75 (3.30)	2.85 (2.80)	1.67 (3.50)
+Bahrain     	0.67 (3.50)	2.22 (2.60)	1.00 (3.20)
+Syria       	1.46 (2.70)	3.00 (2.29)	2.90 (1.81)
+Saudi Arabia	0.75 (3.60)	2.74 (1.52)	3.38 (3.60)
+Average     	1.43 (2.55)	2.84 (2.39)	2.69 (2.84)

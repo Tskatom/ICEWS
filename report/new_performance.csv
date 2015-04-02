@@ -1,0 +1,158 @@
+LA Countries
+Month 2014-07
+Country	0614	0617	0618
+Argentina	3.89	3.16	2.81
+Brazil	2.62	3.20	3.02
+Chile	3.05	2.55	3.48
+Colombia	3.83	2.27	2.82
+Ecuador	3.09	2.39	4.00
+El Salvador	3.66	3.31	4.00
+Mexico	2.36	2.66	2.35
+Paraguay	4.00	3.83	3.83
+Uruguay	4.00	3.48	4.00
+Venezuela	2.16	1.59	2.53
+Average	3.27	2.84	3.28
+Month 2014-08
+Country	0614	0617	0618
+Argentina	1.90	2.46	2.76
+Brazil	2.42	2.59	3.25
+Chile	2.63	2.49	2.64
+Colombia	3.40	2.58	3.26
+Ecuador	4.00	3.24	3.73
+El Salvador	4.00	1.20	3.27
+Mexico	3.04	2.36	1.88
+Paraguay	3.69	3.29	3.73
+Uruguay	4.00	3.31	4.00
+Venezuela	2.99	2.38	2.38
+Average	3.21	2.59	3.09
+Month 2014-09
+Country	0614	0617	0618
+Argentina	2.08	3.33	2.80
+Brazil	2.25	2.49	3.58
+Chile	2.01	2.75	2.20
+Colombia	3.09	2.61	2.76
+Ecuador	2.75	2.85	3.66
+El Salvador	4.00	3.55	3.66
+Mexico	3.20	2.31	2.62
+Paraguay	3.44	3.05	3.09
+Uruguay	4.00	3.48	4.00
+Venezuela	2.31	1.83	3.05
+Average	2.91	2.83	3.14
+Month 2014-10
+Country	0614	0617	0618
+Argentina	2.08	2.51	3.33
+Brazil	3.11	3.18	3.37
+Chile	2.38	2.67	3.14
+Colombia	3.14	3.01	2.29
+Ecuador	3.66	3.39	3.44
+El Salvador	4.00	3.66	4.00
+Mexico	1.76	2.91	2.83
+Paraguay	4.00	2.50	3.20
+Uruguay	4.00	3.48	4.00
+Venezuela	3.05	2.21	2.50
+Average	3.12	2.95	3.21
+Month 2014-11
+Country	0614	0617	0618
+Argentina	2.45	1.99	2.22
+Brazil	2.13	2.15	3.30
+Chile	2.30	1.97	2.84
+Colombia	2.42	2.44	2.36
+Ecuador	2.92	3.11	3.86
+El Salvador	3.73	2.52	2.86
+Mexico	1.06	2.44	2.43
+Paraguay	4.00	3.45	3.24
+Uruguay	3.10	3.45	3.77
+Venezuela	2.59	2.31	2.16
+Average	2.67	2.58	2.90
+Month 2014-12
+Country	0614	0617	0618
+Argentina	2.57	2.98	2.36
+Brazil	1.80	3.21	3.27
+Chile	2.48	2.44	3.63
+Colombia	2.11	2.72	1.83
+Ecuador	3.66	3.77	4.00
+El Salvador	3.66	2.94	2.29
+Mexico	2.19	2.23	2.81
+Paraguay	3.66	2.33	3.77
+Uruguay	3.66	2.85	4.00
+Venezuela	1.33	2.02	2.95
+Average	2.71	2.75	3.09
+Month 2015-01
+Country	0614	0617	0618
+Argentina	4.00	2.00	1.19
+Brazil	2.60	2.92	2.15
+Chile	2.19	2.88	3.31
+Colombia	2.44	2.88	1.39
+Ecuador	4.00	3.31	4.00
+El Salvador	4.00	4.00	4.00
+Mexico	0.37	1.77	2.44
+Paraguay	4.00	4.00	4.00
+Uruguay	4.00	2.88	4.00
+Venezuela	1.12	0.44	2.00
+Average	2.87	2.71	2.85
+
+
+MENA Countries
+Month 2014-07
+Country	0614	0617	0618
+Bahrain	1.64	1.05	2.44
+Iraq	2.29	2.42	2.86
+Jordan	2.45	2.15	2.47
+Libya	2.38	2.54	2.14
+Saudi Arabia	2.94	2.71	2.64
+Syria	3.16	1.80	1.96
+Average	2.48	2.11	2.42
+Month 2014-08
+Country	0614	0617	0618
+Bahrain	2.50	1.73	1.98
+Iraq	2.42	2.37	2.49
+Jordan	2.20	2.22	2.69
+Libya	2.04	1.55	2.84
+Saudi Arabia	3.31	2.00	2.66
+Syria	2.53	1.86	2.03
+Average	2.50	1.96	2.45
+Month 2014-09
+Country	0614	0617	0618
+Bahrain	2.97	1.75	2.33
+Iraq	1.90	3.08	2.90
+Jordan	2.69	2.14	2.17
+Libya	2.66	1.93	2.71
+Saudi Arabia	2.81	2.08	2.72
+Syria	2.20	2.16	2.68
+Average	2.54	2.19	2.58
+Month 2014-10
+Country	0614	0617	0618
+Bahrain	2.52	1.77	2.81
+Iraq	2.35	2.18	3.05
+Jordan	3.66	2.80	3.22
+Libya	3.38	1.79	2.59
+Saudi Arabia	3.38	1.53	1.90
+Syria	2.23	2.00	2.62
+Average	2.92	2.01	2.70
+Month 2014-11
+Country	0614	0617	0618
+Bahrain	1.73	2.04	3.73
+Iraq	2.91	2.93	2.74
+Jordan	2.80	0.09	2.39
+Libya	2.61	1.92	2.39
+Saudi Arabia	3.60	1.52	1.27
+Syria	2.39	1.55	3.02
+Average	2.67	1.68	2.59
+Month 2014-12
+Country	0614	0617	0618
+Bahrain	0.66	2.20	3.66
+Iraq	3.16	3.03	2.41
+Jordan	1.59	0.94	2.59
+Libya	2.94	2.04	2.32
+Saudi Arabia	3.83	2.57	0.55
+Syria	2.44	1.94	2.13
+Average	2.44	2.12	2.28
+Month 2015-01
+Country	0614	0617	0618
+Bahrain	0.00	0.00	1.75
+Iraq	1.75	2.68	3.62
+Jordan	2.19	2.63	4.00
+Libya	0.88	2.00	2.99
+Saudi Arabia	4.00	2.50	2.44
+Syria	0.44	1.42	2.23
+Average	1.54	1.87	2.84
