@@ -45,25 +45,25 @@ def construct_dataset(countries, icews_folder, region="mena"):
         coun_file = os.path.join(icews_folder, country.replace(" ", "_"))
         city = CAPITAL_COUNTRY[country]
         city_file = os.path.join(icews_folder, city.replace(" ", "_"))
-        
-        country_series = pds.Series.from_csv(coun_file, sep='\t')
-        country_series.name = country
+
+        coun_series = pds.Series.from_csv(coun_file, sep='\t')
+        coun_series.name = country
         date_range = pds.date_range('2012-01-01', '2015-03-22')
-        country_series = country_series.reindex(date_range).fillna(0)
+        coun_series = coun_series.reindex(date_range).fillna(0)
 
-        city_series = pds.Series.from_csv(city_file, sep='\t')
-        city_series.name = city
-        city_series = city_series.reindex(date_range).fillna(0)
+        cy_series = pds.Series.from_csv(city_file, sep='\t')
+        cy_series.name = city
+        cy_series = cy_series.reindex(date_range).fillna(0)
 
-        country_series.append(country_series)
-        city_series.append(city_series)
+        country_series.append(coun_series)
+        city_series.append(cy_series)
 
     country_df = pds.concat(country_series, axis=1)
     city_df = pds.concat(city_series, axis=1)
 
     country_weekly_df = country_df.resample('W', how='sum').fillna(0)
     country_weekly_df.index.name = 'date'
-    
+
     city_weekly_df = city_df.resample('W', how='sum').fillna(0)
     city_weekly_df.index.name = 'date'
     #out put to file
