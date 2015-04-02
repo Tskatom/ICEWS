@@ -1,0 +1,36 @@
+library("vars")
+load_data <- function(filename){
+  icews_data <- read.table(filename, header=TRUE, sep=',')
+  return(icews_data)
+}
+
+setwd("/home/weiw/workspace/ICEWS/src/experiment/VAR/")
+icews_file <- "./data/mena.csv"
+icews_data <- load_data(icews_file)
+new_icews_data <- icews_data[-1]
+total_count <- nrow(new_icews_data)
+test_period <- 10
+testY <- new_icews_data[(total_count-test_period+1):total_count,]
+preds <- c()
+for(i in seq(test_period,1,-1))
+{
+  var1 <- VAR(new_icews_data[1:(total_count-i),])
+  pred <- predict(var1, n.ahead=1)
+  pred_count <- c()
+  for(fcst in pred$fcst)
+  {
+    p <- fcst[1]
+    pred_count <- c(pred_count, p)
+  }
+  preds <- c(preds, pred_count)
+}
+preds <- floor(preds)
+preds[preds < 0] = 0
+final_preds <- matrix(preds, nrow=test_period, ncol=dim(new_icews_data)[2], byrow=TRUE)
+colnames(final_preds) <- colnames(new_icews_data)
+
+write.table(testY, file='./data/testY.csv', sep=',', quote=TRUE, row.names=FALSE)
+write.table(final_preds, file='./data/predictions.csv', sep=',', quote=TRUE, row.names=FALSE)
+
+
+

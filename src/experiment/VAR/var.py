@@ -39,11 +39,13 @@ CAPITAL_COUNTRY = {
 }
 
 def construct_dataset(countries, icews_folder, region="mena"):
-    series = []
+    country_series = []
+    city_series = []
     for country in countries:
         coun_file = os.path.join(icews_folder, country.replace(" ", "_"))
         city = CAPITAL_COUNTRY[country]
         city_file = os.path.join(icews_folder, city.replace(" ", "_"))
+        
         country_series = pds.Series.from_csv(coun_file, sep='\t')
         country_series.name = country
         date_range = pds.date_range('2012-01-01', '2015-03-22')
@@ -53,16 +55,38 @@ def construct_dataset(countries, icews_folder, region="mena"):
         city_series.name = city
         city_series = city_series.reindex(date_range).fillna(0)
 
-        series.append(country_series)
-        series.append(city_series)
+        country_series.append(country_series)
+        city_series.append(city_series)
 
-    df = pds.concat(series, axis=1)
+    country_df = pds.concat(country_series, axis=1)
+    city_df = pds.concat(city_series, axis=1)
 
-    weekly_df = df.resample('W', how='sum').fillna(0)
-    weekly_df.index.name = 'date'
+    country_weekly_df = country_df.resample('W', how='sum').fillna(0)
+    country_weekly_df.index.name = 'date'
+    
+    city_weekly_df = city_df.resample('W', how='sum').fillna(0)
+    city_weekly_df.index.name = 'date'
     #out put to file
-    outf = os.path.join('./data', '%s.csv' % region)
-    weekly_df.to_csv(outf)
+    country_outf = os.path.join('./data', 'country_%s.csv' % region)
+    country_weekly_df.to_csv(country_outf)
+
+    city_outf = os.path.join('./data', 'city_%s.csv' % region)
+    city_weekly_df.to_csv(city_outf)
+
+def score(pred, truth):
+    occu = 0.5 * ( (pred > 0) == (truth > 0))
+    accu = 3.5 * (1 - 1.0*abs(pred - truth)/(max([pred, truth, 4])))
+    return occu + accu
+
+def evaluate(pred_file, truth_file):
+    preds = pds.DataFrame.from_csv(pred_file, sep=',', header=0, index_col=None)
+    truths = pds.DataFrame.from_csv(truth_file, sep=',', header=0, index_col=None)
+    names = preds.columns
+    for name in names:
+        p = preds[name]
+        t = truths[name]
+        scores = map(score, p.values, t.values)
+        print np.mean(scores)
 
 test = True
 
@@ -71,4 +95,5 @@ if __name__ == "__main__":
         countries = MENA_COUNTRY
         icews_folder = "/raid/home/tskatom/workspace/icews_model/data/icews_gsr/232/14"
         construct_dataset(countries, icews_folder)
+        #evaluate('./data/predictions.csv', './data/testY.csv')
 
