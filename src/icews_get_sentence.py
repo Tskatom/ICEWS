@@ -14,7 +14,7 @@ import argparse
 import glob
 
 class Icews(object):
-    
+
     def __init__(self, version, raw_folder, out_folder, args):
         """
         Initiate the ICEWS parameters
@@ -25,20 +25,20 @@ class Icews(object):
         self.version = version
         self.raw_folder = raw_folder
         self.out_folder = out_folder
-        self.country_list = {"Argentina":1, "Brazil":1, "Chile":1, "Colombia":1, "Ecuador":1, 
-                "El Salvador":1, "Mexico":1, "Paraguay":1, "Uruguay":1, "Venezuela":1, 
-                "Iraq":1, "Egypt":1, "Libya":1, "Jordan":1, "Bahrain":1, 
+        self.country_list = {"Argentina":1, "Brazil":1, "Chile":1, "Colombia":1, "Ecuador":1,
+                "El Salvador":1, "Mexico":1, "Paraguay":1, "Uruguay":1, "Venezuela":1,
+                "Iraq":1, "Egypt":1, "Libya":1, "Jordan":1, "Bahrain":1,
                 "Syria":1, "Saudi Arabia":1}
 
-        self.capital_city = { 
-            "Argentina": "Buenos Aires", 
-            "Brazil": "Distrito Federal", 
+        self.capital_city = {
+            "Argentina": "Buenos Aires",
+            "Brazil": "Distrito Federal",
             "Chile": "Santiago",
             "Colombia": "Bogota",
             "Ecuador": "Quito",
             "El Salvador": "San Salvador",
             "Mexico": "Mexico City",
-            "Paraguay": "Asuncion", 
+            "Paraguay": "Asuncion",
             "Uruguay": "Montevideo",
             "Venezuela": "Caracas",
             "Iraq": "Baghdad",
@@ -49,9 +49,9 @@ class Icews(object):
             "Syria": "Damascus",
             "Saudi Arabia": "Riyadh"}
         self.args = args
-        
+
         self.events = {}
-    
+
     def read_events(self):
         """
         Read the required events in raw data files
@@ -62,7 +62,7 @@ class Icews(object):
         for code, subset in cameoCode.items():
             for k in subset:
                 num_code = str(subset[k])
-                if num_code[:3] in self.args.limit:
+                if num_code[:2] in self.args.limit:
                     text2code[k.lower().replace(",","")] = code
 
         for f in files:
@@ -80,7 +80,7 @@ class Icews(object):
                     eventCode = text2code.get(eventText, None)
                     if not eventCode:
                         continue
-                    event["Event Sentence"] = "%s\t%s" % (eventDate, event["Event Sentence"]) 
+                    event["Event Sentence"] = "%s\t%s" % (eventDate, event["Event Sentence"])
                     #country event records
                     self.events.setdefault(eventCode, {})
                     self.events[eventCode].setdefault(country, [])
@@ -120,9 +120,9 @@ class Icews(object):
 
 def parse():
     ap = argparse.ArgumentParser()
-    ap.add_argument("--inFolder", 
+    ap.add_argument("--inFolder",
             default="/home/tskatom/workspace/icews_data", type=str)
-    ap.add_argument("--outFolder", 
+    ap.add_argument("--outFolder",
             default="../data/icews_gsr_text",type=str)
     ap.add_argument("--version", type=str)
     ap.add_argument("--limit", type=str, nargs='+')

@@ -4,6 +4,8 @@
 __author__ = "Wei Wang"
 __email__ = "tskatom@vt.edu"
 
+from networkx.readwrite import json_graph
+import numpy as np
 from textblob import TextBlob
 import nltk
 import re
@@ -18,6 +20,7 @@ from dateutil import parser
 from collections import Counter
 import codecs
 from util import logs
+import networkx as nx
 
 logs.init(l=logs.logging.DEBUG)
 logger = logs.getLogger(__name__)
@@ -29,6 +32,16 @@ COUNTRY_ARABIC = {"العراق": "Iraq",
         "البحرين": "Bahrain",
         "سوريا": "Syria",
         "المملكة العربية السعودية": "Saudi Arabia"}
+
+MENA_CAP_DICT = {
+    #"عمّان": "Jordan",
+    u'\u0628\u063a\u062f\u0627\u062f': "Iraq",
+    u'\u0627\u0644\u0642\u0627\u0647\u0631\u0629': "Egypt",
+    u'\u0637\u0631\u0627\u0628\u0644\u0633': "Libya",
+    u'\u0627\u0644\u0645\u0646\u0627\u0645\u0629': "Bahrain",
+    u'\u062f\u0645\u0634\u0642': "Syria",
+    u'\u0627\u0644\u0631\u064a\u0627\u0636': "Saudi Arabia"
+}
 
 COUNTRY_ENG = ["Iraq", "Egypt", "Libya", "Jordan", "Bahrain", "Syria", "Saudi Arabia"]
 
@@ -42,6 +55,108 @@ def handler(task):
     work_func = task["func"]
     result = work_func(task["params"])
     return result
+
+def create_event_count_task(args, task_queue):
+    inFolder = args.inFolder
+    outFolder = args.outFolder
+    countLevel = args.countLevel
+    files = glob.glob(os.path.join(inFolder, "*"))
+    for f in files:
+        task = {}
+        task["func"] = event_count
+        params = {}
+        params["dayFile"] = f
+        params["outFolder"] = outFolder
+        params["countLevel"] = countLevel
+        task["params"] = params
+        task_queue.put(task)
+    task_count = len(files)
+    return task_count
+
+def event_count(params):
+    dayFile = params["dayFile"]
+    outFolder = params["outFolder"]
+    basename = os.path.basename(dayFile)
+    outFile = os.path.join(outFolder, basename)
+    countLevel = params["countLevel"]
+    e_count = {}
+    with open(dayFile) as df, open(outFile, "w") as outf:
+        for line in df:
+            record = json.loads(line)
+            event_date = parser.parse(record["DocDS"]).strftime("%Y-%m-%d")
+            if countLevel == "city":
+                places = record.get("Places", None)
+                if type(places) != list:
+                    continue
+                for p in places:
+                    loc = p["Name"].strip().split("-")
+                    if len(loc) <= 1:
+                        continue
+                    else:
+                        p_loc = loc[1].strip()
+                        if p_loc in MENA_CAP_DICT:
+                            p_loc_cou = MENA_CAP_DICT[p_loc]
+                            e_count.setdefault(p_loc_cou,{})
+                            e_count[p_loc_cou].setdefault(event_date, 0)
+                            e_count[p_loc_cou][event_date] += 1
+
+        json.dump(e_count, outf)
+
+def create_eventLocGroup_task(args, task_queue):
+    inFolder = args.inFolder
+    outFolder = args.outFolder
+    countLevel = args.countLevel
+    files = glob.glob(os.path.join(inFolder, "*"))
+    for f in files:
+        task = {}
+        task["func"] = event_groupby_location
+        params = {}
+        params["dayFile"] = f
+        params["outFolder"] = outFolder
+        params["countLevel"] = countLevel
+        task["params"] = params
+        task_queue.put(task)
+    task_count = len(files)
+    return task_count
+
+def event_groupby_location(params):
+    dayFile = params["dayFile"]
+    outFolder = params["outFolder"]
+    basename = os.path.basename(dayFile)
+    countLevel = params["countLevel"]
+    event_group = {}
+    with open(dayFile) as df:
+        for line in df:
+            try:
+                record = json.loads(line)
+                event_date = parser.parse(record["DocDS"]).strftime("%Y-%m-%d")
+                if countLevel == "city":
+                    places = record.get("Places", None)
+                    if type(places) != list:
+                        continue
+                    for p in places:
+                        loc = p["Name"].strip().split("-")
+                        if len(loc) <= 1:
+                            continue
+                        else:
+                            p_loc = loc[1].strip()
+                            if p_loc in MENA_CAP_DICT:
+                                p_loc_cou = MENA_CAP_DICT[p_loc]
+                                event_group.setdefault(p_loc_cou, [])
+                                event_group[p_loc_cou].append(record)
+            except:
+                logger.info('Error:%s' % dayFile, exc_info=True)
+                continue
+
+    for country in event_group:
+        final_folder = os.path.join(outFolder, country.replace(" ","_"))
+        if not os.path.exists(final_folder):
+            os.mkdir(final_folder)
+        with open(os.path.join(final_folder, basename), 'w') as outf:
+            for event in event_group[country]:
+                outf.write(json.dumps(event) + '\n')
+
+
 
 def create_keywords_count_task(args, task_queue):
     files = glob.glob(os.path.join(args.inFolder, "arabia*"))
@@ -132,6 +247,7 @@ def create_document_matched_task(args, task_queue):
         param["outFolder"] = args.outFolder
         param["logFolder"] = args.logFolder
         param["keywordsFile"] = args.keywordsFile
+        param["match_region"] = args.match_region
         task = {"params": param, "func": document_matched_detail}
         task_queue.put(task)
     task_count = len(files)
@@ -139,6 +255,7 @@ def create_document_matched_task(args, task_queue):
 
 def document_matched_detail(param):
     dayFile = param["dayFile"]
+    match_region = param["match_region"]
     ruleFile = param["keywordsFile"]
     outFolder = param["outFolder"]
     basename = os.path.basename(dayFile)
@@ -152,7 +269,13 @@ def document_matched_detail(param):
         for line in df:
             try:
                 post = json.loads(line)
-                fullText = post["FullText"]
+                if match_region == "full":
+                    fullText = post["FullText"]
+                elif match_region == "lead":
+                    blob = TextBlob(post["FullText"])
+                    # choose first 3 sentences as search range
+                    sentences = [s for s in blob.raw_sentences]
+                    fullText = post['Caption'] + u' ' + u" ".join(sentences[:3])
                 matched = pattern.findall(fullText)
                 post[u'matched'] = {k:v for k, v in Counter(matched).items()}
                 #write to outfile if and only if the keys are not zero
@@ -474,6 +597,83 @@ def create_pos_sens_task(args, task_queue):
         task_count += 1
     return task_count
 
+def crete_event_group_task(args, task_queue):
+    infolder = args.inFolder
+    outfolder = args.outFolder
+    files = glob.glob(os.path.join(infolder, "*"))
+    task_count = 0
+    for f in files:
+        param = {}
+        param["filename"] = f
+        param["outFolder"] = outfolder
+        task = {"params": param, "func": event_group}
+        task_queue.put(task)
+        task_count += 1
+    return task_count
+
+def event_group(param):
+    filename = param["filename"]
+    outFolder = param["outFolder"]
+    outfile = os.path.join(outFolder, os.path.basename(filename))
+    with open(filename) as df, open(outfile, 'w') as dp:
+        country_posts = {}
+        for l in df:
+            post = json.loads(l)
+            places = post["Places"]
+            countries = []
+            #set up the country list for the posts
+            if places is None:
+                pass
+            else:
+                places = set([p["Name"].split("-")[0].encode("utf-8").strip() for p in places])
+                for p_country in places:
+                    if p_country in COUNTRY_ARABIC:
+                        countries.append(COUNTRY_ARABIC[p_country])
+            if len(countries) == 0:
+                continue
+            for country in countries:
+                country_posts.setdefault(country, [])
+                country_posts[country].append(post)
+
+        for country in country_posts:
+            g = nx.Graph()
+            posts = country_posts[country]
+            count = len(posts)
+            sim_matrix = []
+            for i in range(count):
+                p_i = posts[i]
+                g.add_node(p_i['embersId'], cap=p_i['Caption'])
+                for j in range(i+1, count):
+                    p_j = posts[j]
+                    try:
+                        score = similarity(p_i, p_j)
+                        if score >= 0.75:
+                            sim_matrix.append((p_i['embersId'], p_j['embersId'], score))
+                    except:
+                        print sys.exc_info()
+                        continue
+
+            g.add_weighted_edges_from(sim_matrix)
+            conn_events = sorted(nx.connected_components(g), key = len, reverse=True)
+            g_data = json_graph.node_link_data(g)
+            g_data['country'] = country
+            g_data_str = json.dumps(g_data)
+            dp.write(g_data_str + u"\n")
+
+def similarity(p1, p2):
+    text1 = p1['Caption']
+    token1 = Counter(text1.split())
+    text2 = p2['Caption']
+    token2 = Counter(text2.split())
+    words = list(set(token1.keys() + token2.keys()))
+    v1 = np.zeros(len(words))
+    v2 = np.zeros(len(words))
+    for i in range(len(words)):
+        v1[i] = token1[words[i]]
+        v2[i] = token2[words[i]]
+    score = np.dot(v1, v2) / (np.linalg.norm(v1) * np.linalg.norm(v2))
+    return score
+
 def parse_args():
     ap = argparse.ArgumentParser()
     ap.add_argument('--inFolder', type=str)
@@ -486,6 +686,8 @@ def parse_args():
     ap.add_argument('--start', type=str)
     ap.add_argument('--end', type=str)
     ap.add_argument('--code', type=str)
+    ap.add_argument('--countLevel', type=str)
+    ap.add_argument('--match_region', type=str, default='full')
     return ap.parse_args()
 
 
@@ -511,6 +713,12 @@ def main():
         task_count = create_pos_sens_task(args, task_queue)
     elif args.task == "topDocumentCount":
         task_count = create_top_document_count_task(args, task_queue)
+    elif args.task == "eventGroup":
+        task_count = crete_event_group_task(args, task_queue)
+    elif args.task == "eventCount":
+        task_count = create_event_count_task(args, task_queue)
+    elif args.task == 'eventLocGroup':
+        task_count = create_eventLocGroup_task(args, task_queue)
 
     for i in range(args.core):
         Process(target=worker, args=(task_queue,result_queue)).start()
